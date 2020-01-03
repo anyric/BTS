@@ -13,3 +13,9 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+.vscode
+pkg/
+src/github.com/
+src/golang.org/
+src/honnef.co/
+src/mvdan.cc/
