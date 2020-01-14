@@ -1,6 +1,6 @@
 package main
 
-import "api"
+import "github.com/anyric/bts/src/api"
 
 func main() {
     api.Run()

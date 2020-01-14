@@ -2,31 +2,32 @@ package routes
 
 import (
 	"net/http"
-	"api/controllers"
+
+	"github.com/anyric/bts/src/api/controllers"
 )
 var usersRoutes =[]Route{
 	Route{
-		Uri: "/users",
+		URI: "/users",
 		Method: http.MethodGet,
 		Handler: controllers.GetUsers,
 	},
 	Route{
-		Uri: "/users",
+		URI: "/users",
 		Method: http.MethodPost,
 		Handler: controllers.CreateUser,
 	},
 	Route{
-		Uri: "/users/{id}",
+		URI: "/users/{id}",
 		Method: http.MethodGet,
 		Handler: controllers.GetUsers,
 	},
 	Route{
-		Uri: "/users/{id}",
+		URI: "/users/{id}",
 		Method: http.MethodPut,
 		Handler: controllers.UpdateUser,
 	},
 	Route{
-		Uri: "/users/{id}",
+		URI: "/users/{id}",
 		Method: http.MethodDelete,
 		Handler: controllers.DeleteUser,
 	}}
