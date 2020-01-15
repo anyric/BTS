@@ -2,22 +2,27 @@ package routes
 
 import (
 	"net/http"
+
 	"github.com/gorilla/mux"
 )
+
+// Route describe the data structure for the routes
 type Route struct {
-	Uri string
-	Method string
+	URI     string
+	Method  string
 	Handler func(http.ResponseWriter, *http.Request)
 }
 
-func Load() []Route  {
+// Load slices of the route
+func Load() []Route {
 	routes := usersRoutes
 	return routes
 }
 
+// SetupRoutes using the gorilla mux router
 func SetupRoutes(r *mux.Router) *mux.Router {
 	for _, route := range Load() {
-		r.HandleFunc(route.Uri, route.Handler).Methods(route.Method)
+		r.HandleFunc(route.URI, route.Handler).Methods(route.Method)
 	}
 	return r
 }

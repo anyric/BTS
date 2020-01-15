@@ -1,12 +1,12 @@
-package database
+package models
 
 import (
-	"config"
+	"github.com/anyric/bts/src/config"
 	"github.com/jinzhu/gorm"
-
 )
-// Connect connect to databse
-func Connect() (*gorm.DB, error)  {
+
+// Connect to a databse an return an instance
+func Connect() (*gorm.DB, error) {
 	db, err := gorm.Open(config.DBDRIVER, config.DBURL)
 
 	if err != nil {
