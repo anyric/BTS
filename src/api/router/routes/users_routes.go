@@ -7,27 +7,27 @@ import (
 )
 var usersRoutes =[]Route{
 	Route{
-		URI: "/users",
+		URI: "/api/v1/users",
 		Method: http.MethodGet,
 		Handler: controllers.GetUsers,
 	},
 	Route{
-		URI: "/users",
+		URI: "/api/v1/users",
 		Method: http.MethodPost,
 		Handler: controllers.CreateUser,
 	},
 	Route{
-		URI: "/users/{id}",
+		URI: "/api/v1/users/{id}",
 		Method: http.MethodGet,
-		Handler: controllers.GetUsers,
+		Handler: controllers.GetUser,
 	},
 	Route{
-		URI: "/users/{id}",
+		URI: "/api/v1/users/{id}",
 		Method: http.MethodPut,
 		Handler: controllers.UpdateUser,
 	},
 	Route{
-		URI: "/users/{id}",
+		URI: "/api/v1/users/{id}",
 		Method: http.MethodDelete,
 		Handler: controllers.DeleteUser,
 	}}
