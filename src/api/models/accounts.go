@@ -27,7 +27,7 @@ type Account struct {
 // Validate user accounts
 func (account *Account) Validate() (map[string]interface{}, bool) {
 	if len(account.Mobile) < 13 {
-		return u.Message(false, "Username is required"), false
+		return u.Message(false, "Mobile is required"), false
 	}
 
 	if len(account.Password) < 6 {
@@ -38,14 +38,14 @@ func (account *Account) Validate() (map[string]interface{}, bool) {
 	temp := &Account{}
 
 	//check for errors and duplicate username and password
-	err := db.Table("accounts").Where("Username = ?", account.Mobile).First(temp).Error
+	err := db.Table("accounts").Where("Mobile = ?", account.Mobile).First(temp).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return u.Message(false, "Connection error. Please retry"), false
 	}
 
 	if temp.Mobile != "" {
-		return u.Message(false, "Email address already in use by another user."), false
+		return u.Message(false, "Mobile number already in use by another user."), false
 	}
 
 	return u.Message(false, "Requirements passed"), true

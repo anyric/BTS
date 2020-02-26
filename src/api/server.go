@@ -11,7 +11,7 @@ import (
 
 //Run starts the app on port 8080
 func Run() {
-	fmt.Printf("\n\tListening [::]:%d\n", config.PORT)
+	fmt.Printf("\n\tListening [::]:%d\n\n", config.PORT)
 	listen(config.PORT)
 
 }
