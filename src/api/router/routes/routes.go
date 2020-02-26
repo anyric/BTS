@@ -31,10 +31,10 @@ func SetupRoutes(r *mux.Router) *mux.Router {
 // SetupRoutesWithMiddlewares for logging user requests
 func SetupRoutesWithMiddlewares(r *mux.Router) *mux.Router {
 	for _, route := range Load() {
-		r.HandleFunc(route.URI,
+		r.HandleFunc(route.URI, middlewares.ValidateMiddleWare(
 			middlewares.SetMiddleWareLogger(
 				middlewares.SetMiddleWareJSON(route.Handler)),
-			).Methods(route.Method)
+		)).Methods(route.Method)
 	}
 	return r
 }
