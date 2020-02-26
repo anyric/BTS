@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/anyric/bts/src/api/middlewares"
 )
 
 // Route describe the data structure for the routes
@@ -23,6 +24,17 @@ func Load() []Route {
 func SetupRoutes(r *mux.Router) *mux.Router {
 	for _, route := range Load() {
 		r.HandleFunc(route.URI, route.Handler).Methods(route.Method)
+	}
+	return r
+}
+
+// SetupRoutesWithMiddlewares for logging user requests
+func SetupRoutesWithMiddlewares(r *mux.Router) *mux.Router {
+	for _, route := range Load() {
+		r.HandleFunc(route.URI,
+			middlewares.SetMiddleWareLogger(
+				middlewares.SetMiddleWareJSON(route.Handler)),
+			).Methods(route.Method)
 	}
 	return r
 }
