@@ -3,8 +3,8 @@ package models
 import (
 	"fmt"
 	"os"
+	u "utils"
 
-	u "github.com/anyric/bts/src/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"

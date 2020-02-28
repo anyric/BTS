@@ -1,8 +1,9 @@
 package router
 
 import (
+	"api/router/routes"
+
 	"github.com/gorilla/mux"
-	"github.com/anyric/bts/src/api/router/routes"
 )
 
 //New creates request routers

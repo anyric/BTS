@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
+	"api"
+	"api/models"
+	"config"
 
-	"github.com/anyric/bts/src/api"
-	"github.com/anyric/bts/src/api/models"
-	"github.com/anyric/bts/src/config"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	_ "github.com/jinzhu/gorm/dialects/postgres"

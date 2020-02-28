@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/anyric/bts/src/api/router"
-	"github.com/anyric/bts/src/config"
+	"api/router"
+	"config"
 )
 
 //Run starts the app on port 8080

@@ -6,8 +6,7 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
-
-	"github.com/anyric/bts/src/api/models"
+	"api/models"
 )
 
 //GetUsers List all users

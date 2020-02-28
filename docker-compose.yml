@@ -1,0 +1,31 @@
+version: '3'
+services:
+  database:
+    image: postgres:10.7
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=@postgres
+      - POSTGRES_DB=bts
+
+  app:
+    build: .
+    restart: on-failure
+    environment:
+      - API_PORT=9000
+      - DB_HOST=database
+      - DB_DRIVER=postgres
+      - DB_USER=postgres
+      - DB_PASS=@postgres
+      - DB_NAME=bts
+      - DB_PORT=5432
+      - TOKEN_SALT=oq&0fah72+y8(-qijb9-@pbp9!$p^3pym(!&_mk%5t*a
+      - DB_SSL_MODE=disable
+    depends_on:
+      - database
+    ports:
+      - 9000:9000
+
+volumes:
+  data:
