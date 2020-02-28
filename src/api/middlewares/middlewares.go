@@ -62,7 +62,6 @@ func ValidateMiddleWare(next http.HandlerFunc) http.HandlerFunc {
 			}
 		} else {
 			json.NewEncoder(w).Encode(Exception{Message: "An authorization header is required"})
-			
 		}
 	}
 }

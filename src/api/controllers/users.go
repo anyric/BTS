@@ -1,13 +1,12 @@
 package controllers
 
 import (
+	"api/models"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"regexp"
 	"strconv"
-
-	"github.com/anyric/bts/src/api/models"
 )
 
 //GetUsers List all users
@@ -34,8 +33,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(err.Error()))
 	} else {
 		w.Header().Set("Content-Type", "application/json")
-		accouunt.Create()
-		response, _ := json.Marshal(accouunt)
+		res := accouunt.Create()
+		response, _ := json.Marshal(res)
 		w.Write(response)
 	}
 }
@@ -77,7 +76,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		} else {
 			w.Header().Set("Content-Type", "application/json")
 			row, err := models.UpdateUser(id, account)
-			
+
 			if err != nil {
 				w.Write([]byte(err.Error()))
 			}
@@ -86,7 +85,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 				response, _ := json.Marshal(acc)
 				w.Write(response)
 			}
-			
+
 		}
 	}
 }
@@ -109,4 +108,3 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
-

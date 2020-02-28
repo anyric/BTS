@@ -3,8 +3,8 @@ package models
 import (
 	"fmt"
 	"os"
+	u "utils"
 
-	u "github.com/anyric/bts/src/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
@@ -61,8 +61,10 @@ func (account *Account) Create() map[string]interface{} {
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(account.Password), bcrypt.DefaultCost)
 	account.Password = string(hashedPassword)
 
-	db.Create(account)
-
+	err := db.Create(account).Error
+	if err != nil {
+		return u.Message(false, fmt.Sprintf("%s",err))
+	}
 	if account.ID <= 0 {
 		return u.Message(false, "Failed to create account, connection error.")
 	}
@@ -87,7 +89,7 @@ func Login(mobile, password string) map[string]interface{} {
 	err := db.Table("accounts").Where("mobile = ?", mobile).First(account).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return u.Message(false, "mobile not found")
+			return u.Message(false, "Invalid login credentials. Please try again")
 		}
 		return u.Message(false, "Connection error. Please retry")
 	}
@@ -105,7 +107,7 @@ func Login(mobile, password string) map[string]interface{} {
 	tokenString, _ := token.SignedString([]byte(os.Getenv("TOKEN_SALT")))
 	account.Token = tokenString //Store the token in the response
 
-	resp := u.Message(true, "Logged In")
+	resp := u.Message(true, "Successfully logged in")
 	resp["account"] = account
 	return resp
 }
@@ -125,7 +127,7 @@ func GetUser(u uint) (*Account, error) {
 }
 
 // GetUsers retrieve all users
-func GetUsers() ([]*Account, error) {
+func GetUsers() (map[string]interface{}, error) {
 
 	accounts := make([]*Account, 0)
 	err := db.Table("accounts").Find(&accounts).Error
@@ -133,7 +135,7 @@ func GetUsers() ([]*Account, error) {
 		return nil, fmt.Errorf("Account not Found")
 	}
 
-	return accounts, nil
+	return map[string]interface{}{"count": len(accounts), "users": accounts}, nil
 }
 
 // UpdateUser with a given ID

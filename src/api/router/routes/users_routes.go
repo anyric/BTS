@@ -2,8 +2,7 @@ package routes
 
 import (
 	"net/http"
-
-	"github.com/anyric/bts/src/api/controllers"
+	"api/controllers"
 )
 var usersRoutes =[]Route{
 	Route{

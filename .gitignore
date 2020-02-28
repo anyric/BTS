@@ -16,3 +16,9 @@
 .vscode
 node_modules/
 .env
+bin/
+pkg/
+src/github.com/
+src/golang.org/
+src/contrib.*/
+src/go*/

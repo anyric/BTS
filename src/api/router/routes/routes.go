@@ -1,23 +1,24 @@
 package routes
 
 import (
+	"api/middlewares"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/anyric/bts/src/api/middlewares"
 )
 
 // Route describe the data structure for the routes
 type Route struct {
-	URI     string
-	Method  string
-	Handler func(http.ResponseWriter, *http.Request)
+	URI          string
+	Method       string
+	Handler      func(http.ResponseWriter, *http.Request)
 	AuthRequired bool
 }
 
 // Load slices of the route
 func Load() []Route {
 	routes := usersRoutes
+	routes = append(routes, authRoutes...) 
 	return routes
 }
 
@@ -37,7 +38,7 @@ func SetupRoutesWithMiddlewares(r *mux.Router) *mux.Router {
 				middlewares.SetMiddleWareLogger(
 					middlewares.SetMiddleWareJSON(route.Handler)),
 			)).Methods(route.Method)
-		}else{
+		} else {
 			r.HandleFunc(route.URI, middlewares.SetMiddleWareLogger(
 				middlewares.SetMiddleWareJSON(route.Handler)),
 			).Methods(route.Method)
